@@ -4,151 +4,234 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JFLEX OG | IT Student Tanzania</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-green: #76b82a;
-            --dark-bg: #0a0a0a;
-            --card-bg: #161616;
-            --light-text: #f4f4f4;
+            --accent-glow: rgba(118, 184, 42, 0.3);
+            --dark-bg: #050505;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --light-text: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body {
             margin: 0;
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--dark-bg);
             color: var(--light-text);
-            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Gradients */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(118, 184, 42, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(118, 184, 42, 0.05) 0%, transparent 40%);
+            z-index: -1;
         }
 
         header {
-            padding: 20px 5%;
+            padding: 15px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(0,0,0,0.95);
-            border-bottom: 2px solid var(--primary-green);
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
-        .logo { font-size: 1.6rem; font-weight: 800; color: var(--primary-green); letter-spacing: 2px; }
+        .logo { 
+            font-size: 1.4rem; 
+            font-weight: 800; 
+            color: var(--primary-green); 
+            letter-spacing: -1px;
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
 
         .hero {
-            padding: 100px 20px;
+            padding: 120px 20px 100px;
             text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), 
+            background: linear-gradient(to bottom, rgba(5,5,5,0.2), var(--dark-bg)),
                         url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
         }
 
-        .hero h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); margin: 0; color: #fff; }
-        .hero p { max-width: 750px; margin: 25px auto; color: #aaa; font-size: 1.15rem; }
+        .hero h1 { 
+            font-size: clamp(3rem, 10vw, 5.5rem); 
+            margin: 0; 
+            font-weight: 800;
+            background: linear-gradient(to bottom, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -2px;
+        }
 
-        .container { max-width: 1100px; margin: -50px auto 50px; padding: 0 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .hero p { 
+            max-width: 600px; 
+            margin: 20px auto; 
+            color: #999; 
+            font-size: 1.1rem; 
+            font-weight: 300;
+        }
+
+        .container { max-width: 1000px; margin: -60px auto 50px; padding: 0 20px; }
+        
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 25px; 
+        }
 
         .card {
             background: var(--card-bg);
-            padding: 40px 20px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border: 1px solid #222;
+            backdrop-filter: blur(12px);
+            padding: 40px 30px;
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
             text-align: center;
-            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .card:hover { border-color: var(--primary-green); transform: translateY(-5px); }
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, transparent, rgba(118, 184, 42, 0.05));
+            pointer-events: none;
+        }
 
-        .id-label { display: block; font-size: 0.7rem; color: var(--primary-green); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 15px; }
+        .card:hover { 
+            border-color: var(--primary-green); 
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px var(--accent-glow);
+        }
+
+        .id-label { 
+            display: block; 
+            font-size: 0.75rem; 
+            color: var(--primary-green); 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            margin-bottom: 12px; 
+            font-weight: 600;
+        }
         
-        /* Highlighted ID Styling */
         .id-value { 
-            font-size: 1.6rem; 
-            font-weight: 800; 
-            margin-bottom: 10px; 
+            font-size: 1.8rem; 
+            font-weight: 700; 
+            margin-bottom: 20px; 
             display: block; 
             color: #fff;
-            user-select: all; /* Allows easy copying on some browsers */
-        }
-
-        .copy-instruction {
-            display: block;
-            font-size: 0.75rem;
-            color: #777;
-            margin-bottom: 25px;
-            font-style: italic;
         }
 
         .btn {
             display: inline-block;
-            padding: 12px 30px;
-            border-radius: 8px;
+            padding: 14px 24px;
+            border-radius: 12px;
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 0.9rem;
-            transition: 0.3s;
-            text-transform: uppercase;
+            width: 100%;
+            cursor: pointer;
         }
 
-        .btn-visit { background: var(--primary-green); color: #000; width: 85%; }
-        .btn-visit:hover { filter: brightness(1.2); box-shadow: 0 0 15px rgba(118, 184, 42, 0.4); }
+        .btn-visit { 
+            background: var(--primary-green); 
+            color: #000; 
+            box-shadow: 0 4px 15px rgba(118, 184, 42, 0.3);
+        }
 
-        .whatsapp-card { grid-column: 1 / -1; background: linear-gradient(145deg, #161616, #0f0f0f); border: 1px dashed var(--primary-green); }
+        .btn-visit:hover { 
+            transform: scale(1.02);
+            filter: brightness(1.1);
+        }
 
-        footer { text-align: center; padding: 60px 20px; color: #444; font-size: 0.8rem; letter-spacing: 1px; }
+        .whatsapp-card { 
+            grid-column: 1 / -1; 
+            background: linear-gradient(145deg, rgba(22, 22, 22, 0.4), rgba(5, 5, 5, 0.4));
+            border: 1px solid var(--primary-green);
+        }
+
+        footer { 
+            text-align: center; 
+            padding: 80px 20px; 
+            color: #555; 
+            font-size: 0.75rem; 
+            text-transform: uppercase;
+            letter-spacing: 2px; 
+        }
+
+        /* Subtle Animation for entrance */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card { animation: fadeInUp 0.6s ease forwards; }
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo">JFLEX OG</div>
-        <div style="color:var(--primary-green); font-size: 0.8rem; font-weight: bold;">I.T STUDENT • TANZANIA</div>
+        <div style="color:var(--primary-green); font-size: 0.75rem; font-weight: 800; letter-spacing: 1px;">TZ TECH TALENT</div>
     </header>
 
     <section class="hero">
         <h1>JFLEX OG</h1>
         <p>
-            An ambitious IT student from Tanzania, dedicated to mastering digital landscapes. 
-            I focus on bridging the gap between complex data systems and user-friendly technology, 
-            driving innovation through code and creative problem-solving in the ever-evolving tech world.
+            Bridging the gap between complex data and user-centric tech. 
+            An IT specialist shaping the digital future in Tanzania.
         </p>
     </section>
 
     <div class="container">
         <div class="grid">
             
-            <div class="card" style="border: 1px solid var(--primary-green);">
-                <span class="id-label">PUBG MOBILE</span>
+            <div class="card" style="animation-delay: 0.1s;">
+                <span class="id-label">PUBG Mobile</span>
                 <span class="id-value">5882549343</span>
-                <span class="copy-instruction">Hold the number to copy JFLEX ID</span>
-                <a href="" target="_blank" class="btn btn-visit">View Profile</a>
+                <a href="#" class="btn btn-visit">Copy Player ID</a>
             </div>
 
-            <div class="card">
+            <div class="card" style="animation-delay: 0.2s;">
                 <span class="id-label">TikTok</span>
                 <span class="id-value">@jflexxxogg</span>
-                <a href="https://www.tiktok.com/@jflexxxogg" target="_blank" class="btn btn-visit" style="margin-top: 15px;">Watch Videos</a>
+                <a href="https://www.tiktok.com/@jflexxxogg" target="_blank" class="btn btn-visit">Watch Content</a>
             </div>
 
-            <div class="card">
+            <div class="card" style="animation-delay: 0.3s;">
                 <span class="id-label">Instagram</span>
                 <span class="id-value">@jflex_og</span>
-                <a href="https://instagram.com/jflex_og" target="_blank" class="btn btn-visit" style="margin-top: 15px;">Follow Me</a>
+                <a href="https://instagram.com/jflex_og" target="_blank" class="btn btn-visit">View Profile</a>
             </div>
 
-            <div class="card whatsapp-card">
-                <span class="id-label">Direct Line</span>
+            <div class="card whatsapp-card" style="animation-delay: 0.4s;">
+                <span class="id-label">Get in Touch</span>
                 <span class="id-value">+255 610 274 920</span>
-                <a href="https://wa.me/255610274920" class="btn btn-visit" style="width: auto;">Chat on WhatsApp</a>
+                <a href="https://wa.me/255610274920" class="btn btn-visit" style="max-width: 300px; margin: 0 auto;">Message on WhatsApp</a>
             </div>
 
         </div>
     </div>
 
     <footer>
-        &copy; 2026 JFLEX OG • BUILT BY AN I.T STUDENT • TANZANIA
+        &copy; 2026 JFLEX OG • Designed with Precision
     </footer>
 
 </body>
