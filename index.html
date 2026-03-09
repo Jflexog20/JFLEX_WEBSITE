@@ -9,93 +9,195 @@
         :root {
             --primary: #86efac;
             --secondary: #22c55e;
-            --bg-dark: #020617;
-            --glass: rgba(15, 23, 42, 0.7);
-            --border: rgba(255, 255, 255, 0.1);
+            --bg-dark: #030712;
+            --glass: rgba(15, 23, 42, 0.4);
+            --border: rgba(255, 255, 255, 0.08);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Space Grotesk', sans-serif; background-color: var(--bg-dark); color: #f8fafc; overflow-x: hidden; min-height: 100vh; }
+        body { 
+            font-family: 'Space Grotesk', sans-serif; 
+            background-color: var(--bg-dark); 
+            color: #f8fafc; 
+            overflow-x: hidden; 
+            min-height: 100vh; 
+        }
+
+        /* --- ADVANCED MULTI-LAYER BACKGROUND --- */
+        .bg-wrapper {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+            background: var(--bg-dark);
+            overflow: hidden;
+        }
+
+        /* Animated Mesh Glows */
+        .glow {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(134, 239, 172, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: move 20s infinite alternate;
+        }
+        .glow-1 { top: -200px; left: -200px; }
+        .glow-2 { bottom: -200px; right: -200px; animation-duration: 15s; animation-direction: alternate-reverse; }
+
+        @keyframes move {
+            from { transform: translate(0, 0); }
+            to { transform: translate(100px, 200px); }
+        }
+
+        /* Digital Grid Overlay */
+        .grid-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(134, 239, 172, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(134, 239, 172, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            mask-image: radial-gradient(ellipse at center, black, transparent 80%);
+        }
+
+        /* --- UI COMPONENTS --- */
+        header { 
+            padding: 25px 8%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            backdrop-filter: blur(20px); 
+            border-bottom: 1px solid var(--border); 
+            position: sticky; top: 0; z-index: 100; 
+        }
         
-        /* Animated Background */
-        .bg-animate { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, #0f172a 0%, #020617 100%); z-index: -2; }
-        .circles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: -1; }
-        .circles li { position: absolute; display: block; list-style: none; width: 20px; height: 20px; background: rgba(134, 239, 172, 0.05); animation: animate 25s linear infinite; bottom: -150px; border-radius: 50%; }
-        @keyframes animate { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; } }
-        .circles li:nth-child(1){ left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
-        .circles li:nth-child(2){ left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
-        .circles li:nth-child(3){ left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
+        .logo { 
+            font-size: 1.6rem; font-weight: 800; 
+            letter-spacing: -1px;
+            color: #fff;
+        }
 
-        /* Header & Hero */
-        header { padding: 30px 10%; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(15px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
-        .logo { font-size: 1.8rem; font-weight: 700; background: linear-gradient(90deg, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero { padding: 120px 20px 60px; text-align: center; }
-        .hero h1 { font-size: clamp(3.5rem, 12vw, 7rem); line-height: 0.9; margin-bottom: 20px; font-weight: 700; filter: drop-shadow(0 0 20px rgba(134, 239, 172, 0.3)); }
-        .hero p { font-size: 1.2rem; color: #94a3b8; max-width: 600px; margin: 0 auto; font-weight: 300; }
+        .hero { padding: 100px 20px 60px; text-align: center; }
+        .hero h1 { 
+            font-size: clamp(3rem, 10vw, 6rem); 
+            line-height: 1; margin-bottom: 20px; font-weight: 700;
+            background: linear-gradient(to bottom, #fff 30%, #4ade80);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p { color: #94a3b8; max-width: 550px; margin: 0 auto; font-weight: 300; }
 
-        /* Grid & Cards */
-        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-        .card { background: var(--glass); border: 1px solid var(--border); border-radius: 32px; padding: 50px 30px; text-align: center; transition: 0.5s; position: relative; overflow: hidden; backdrop-filter: blur(20px); animation: reveal 0.8s ease-out forwards; }
-        .card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-        .id-label { text-transform: uppercase; font-size: 0.7rem; letter-spacing: 4px; color: var(--primary); display: block; margin-bottom: 15px; font-weight: 700; }
-        .id-value { font-size: 2rem; font-weight: 700; color: #fff; display: block; margin-bottom: 30px; }
+        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
 
-        /* Buttons */
-        .btn { display: inline-flex; align-items: center; justify-content: center; width: 100%; padding: 18px; border-radius: 16px; background: var(--primary); color: #020617; text-decoration: none; font-weight: 700; font-size: 1rem; transition: 0.3s; cursor: pointer; border: none; font-family: inherit; box-shadow: 0 10px 20px -5px rgba(134, 239, 172, 0.4); }
-        .btn:hover { background: #fff; transform: translateY(-2px); }
-        .whatsapp-card { grid-column: 1 / -1; background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(15, 23, 42, 0.7)); border: 1px solid var(--secondary); }
+        .card { 
+            background: var(--glass); 
+            border: 1px solid var(--border); 
+            border-radius: 24px; padding: 45px 30px; 
+            text-align: center; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(12px); 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .card:hover { 
+            transform: translateY(-10px); 
+            border-color: var(--primary); 
+            background: rgba(134, 239, 172, 0.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(134, 239, 172, 0.1);
+        }
 
-        @keyframes reveal { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .id-label { text-transform: uppercase; font-size: 0.7rem; letter-spacing: 3px; color: var(--primary); display: block; margin-bottom: 15px; font-weight: 600; }
+        .id-value { font-size: 1.8rem; font-weight: 700; color: #fff; display: block; margin-bottom: 25px; }
 
-        footer { padding: 80px 20px 40px; text-align: center; opacity: 0.5; font-size: 0.8rem; letter-spacing: 2px; }
+        .btn { 
+            display: inline-flex; align-items: center; justify-content: center; 
+            width: 100%; padding: 16px; border-radius: 12px; 
+            background: var(--primary); color: #020617; 
+            text-decoration: none; font-weight: 700; font-size: 0.9rem; 
+            transition: 0.3s; cursor: pointer; border: none; font-family: inherit; 
+        }
+        .btn:hover { background: #fff; transform: scale(1.02); }
+
+        .whatsapp-card { 
+            grid-column: 1 / -1; 
+            background: linear-gradient(135deg, rgba(134, 239, 172, 0.08), rgba(15, 23, 42, 0.6));
+        }
+
+        #toast { 
+            visibility: hidden; min-width: 200px; background: #fff; color: #000; 
+            text-align: center; border-radius: 50px; padding: 12px 24px; 
+            position: fixed; z-index: 1000; left: 50%; bottom: 40px; 
+            transform: translateX(-50%); font-weight: 700; font-size: 0.9rem;
+        }
+        #toast.show { visibility: visible; animation: pop 0.4s ease-out; }
+
+        @keyframes pop { from { bottom: 0; opacity: 0; } to { bottom: 40px; opacity: 1; } }
+
+        footer { padding: 60px 20px; text-align: center; opacity: 0.4; font-size: 0.7rem; letter-spacing: 2px; }
     </style>
 </head>
 <body>
 
-    <div class="bg-animate"></div>
-    <ul class="circles"><li></li><li></li><li></li><li></li></ul>
+    <div class="bg-wrapper">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+    </div>
+    <div class="grid-overlay"></div>
+
+    <div id="toast">ID COPIED ✅</div>
 
     <header>
-        <div class="logo">JFLEX.OG</div>
-        <div style="font-size: 0.7rem; color: var(--primary); border: 1px solid var(--primary); padding: 5px 12px; border-radius: 20px;">SYSTEMS ARCHITECT</div>
+        <div class="logo">JFLEX<span style="color:var(--primary)">.OG</span></div>
+        <div style="font-size: 0.65rem; background: rgba(134, 239, 172, 0.1); color: var(--primary); padding: 6px 15px; border-radius: 30px; border: 1px solid rgba(134, 239, 172, 0.2);">IT SPECIALIST</div>
     </header>
 
     <section class="hero">
-        <h1>FUTURE<br><span style="color: var(--primary)">DRIVEN.</span></h1>
-        <p>Tanzanian IT Student & Developer crafting high-performance digital solutions.</p>
+        <h1>THE DIGITAL<br>ARCHITECT</h1>
+        <p>Mastering code and systems. Crafting the future of tech in Tanzania.</p>
     </section>
 
     <div class="container">
         <div class="grid">
             
             <div class="card">
-                <span class="id-label">Battleground</span>
-                <span class="id-value">5882549343</span>
-                <a href="#" class="btn">VIEW STATS</a>
+                <span class="id-label">PUBG Mobile</span>
+                <span class="id-value" id="pubgId">5882549343</span>
+                <button class="btn" onclick="copyId('pubgId')">COPY PLAYER ID</button>
             </div>
 
             <div class="card">
-                <span class="id-label">Lifestyle</span>
+                <span class="id-label">Instagram</span>
                 <span class="id-value">@jflex_og</span>
-                <a href="https://instagram.com/jflex_og" target="_blank" class="btn">FOLLOW FEED</a>
+                <a href="https://instagram.com/jflex_og" target="_blank" class="btn" style="background: transparent; border: 1px solid var(--primary); color: #fff;">FOLLOW</a>
             </div>
 
             <div class="card">
-                <span class="id-label">Viral Content</span>
+                <span class="id-label">TikTok</span>
                 <span class="id-value">@jflexxxogg</span>
-                <a href="https://www.tiktok.com/@jflexxxogg" target="_blank" class="btn">WATCH TIKTOK</a>
+                <a href="https://www.tiktok.com/@jflexxxogg" target="_blank" class="btn" style="background: transparent; border: 1px solid var(--primary); color: #fff;">WATCH</a>
             </div>
 
             <div class="card whatsapp-card">
-                <span class="id-label">Direct Line</span>
+                <span class="id-label">Connect</span>
                 <span class="id-value">+255 610 274 920</span>
-                <a href="https://wa.me/255610274920" target="_blank" class="btn" style="max-width: 400px; margin: 0 auto;">ENCRYPTED CHAT</a>
+                <a href="https://wa.me/255610274920" target="_blank" class="btn" style="max-width: 300px; margin: 0 auto;">START CHAT</a>
             </div>
 
         </div>
     </div>
 
-    <footer>&copy; 2026 JFLEX OG • ALL SYSTEMS OPERATIONAL</footer>
+    <script>
+        function copyId(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById("toast");
+                toast.className = "show";
+                setTimeout(() => toast.className = "", 2500);
+            });
+        }
+    </script>
+
+    <footer>&copy; 2026 JFLEX OG • DAR ES SALAAM, TZ</footer>
 </body>
 </html>
