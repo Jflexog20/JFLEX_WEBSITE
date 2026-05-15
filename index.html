@@ -3,203 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JFLEX OG | THE DIGITAL EXPERIENCE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>JFLEX OG | PLAYER SUPPORT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #86efac;
-            --secondary: #22c55e;
-            --bg-dark: #030712;
-            --glass: rgba(15, 23, 42, 0.4);
-            --border: rgba(255, 255, 255, 0.08);
+            --pubg-gold: #ffc107;
+            --pubg-gold-dim: #b38808;
+            --bg-dark: #121212;
+            --card-bg: #1e1e1e;
+            --border-gray: #333;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Space Grotesk', sans-serif; 
-            background-color: var(--bg-dark); 
-            color: #f8fafc; 
-            overflow-x: hidden; 
-            min-height: 100vh; 
-        }
-
-        .bg-wrapper {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -2;
-            background: var(--bg-dark);
-            overflow: hidden;
-        }
-
-        .glow {
-            position: absolute;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(134, 239, 172, 0.15) 0%, transparent 70%);
-            border-radius: 50%;
-            filter: blur(80px);
-            animation: move 20s infinite alternate;
-        }
-        .glow-1 { top: -200px; left: -200px; }
-        .glow-2 { bottom: -200px; right: -200px; animation-duration: 15s; animation-direction: alternate-reverse; }
-
-        @keyframes move {
-            from { transform: translate(0, 0); }
-            to { transform: translate(100px, 200px); }
-        }
-
-        .grid-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                linear-gradient(rgba(134, 239, 172, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(134, 239, 172, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: -1;
-            mask-image: radial-gradient(ellipse at center, black, transparent 80%);
-        }
-
-        header { 
-            padding: 25px 8%; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            backdrop-filter: blur(20px); 
-            border-bottom: 1px solid var(--border); 
-            position: sticky; top: 0; z-index: 100; 
-        }
         
-        .logo { 
-            font-size: 1.6rem; font-weight: 800; 
-            letter-spacing: -1px;
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            background: var(--bg-dark); 
             color: #fff;
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                              url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); /* Placeholder for PUBG style background */
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
         }
 
-        .hero { padding: 100px 20px 60px; text-align: center; }
-        .hero h1 { 
-            font-size: clamp(3rem, 10vw, 6rem); 
-            line-height: 1; margin-bottom: 20px; font-weight: 700;
-            background: linear-gradient(to bottom, #fff 30%, #4ade80);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .hero p { color: #94a3b8; max-width: 550px; margin: 0 auto; font-weight: 300; }
-
-        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-
-        .card { 
-            background: var(--glass); 
-            border: 1px solid var(--border); 
-            border-radius: 24px; padding: 45px 30px; 
-            text-align: center; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: blur(12px); 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        .card:hover { 
-            transform: translateY(-10px); 
-            border-color: var(--primary); 
-            background: rgba(134, 239, 172, 0.05);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(134, 239, 172, 0.1);
+        header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            background: rgba(0,0,0,0.8);
         }
 
-        .id-label { text-transform: uppercase; font-size: 0.7rem; letter-spacing: 3px; color: var(--primary); display: block; margin-bottom: 15px; font-weight: 600; }
-        .id-value { font-size: 1.8rem; font-weight: 700; color: #fff; display: block; margin-bottom: 25px; }
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo-main { font-weight: 900; font-style: italic; font-size: 1.5rem; letter-spacing: -1px; }
+        .logo-tag { border-left: 2px solid #fff; padding-left: 10px; font-size: 0.8rem; color: #aaa; text-transform: uppercase; }
 
-        .btn { 
-            display: inline-flex; align-items: center; justify-content: center; 
-            width: 100%; padding: 16px; border-radius: 12px; 
-            background: var(--primary); color: #020617; 
-            text-decoration: none; font-weight: 700; font-size: 0.9rem; 
-            transition: 0.3s; cursor: pointer; border: none; font-family: inherit; 
+        .hero { padding: 60px 20px; text-align: left; max-width: 1200px; margin: 0 auto; }
+        .hero h1 { font-size: 2.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 10px; }
+        .hero .highlight { color: var(--pubg-gold); }
+
+        .search-bar {
+            width: 100%;
+            max-width: 600px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid #444;
+            padding: 15px;
+            border-radius: 4px;
+            color: #fff;
+            margin-top: 20px;
         }
-        .btn:hover { background: #fff; transform: scale(1.02); }
 
-        .whatsapp-card { 
-            grid-column: 1 / -1; 
-            background: linear-gradient(135deg, rgba(134, 239, 172, 0.08), rgba(15, 23, 42, 0.6));
+        .section-title {
+            max-width: 1200px;
+            margin: 40px auto 20px;
+            padding: 0 20px;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--pubg-gold);
+            display: inline-block;
+            padding-bottom: 5px;
+            margin-left: 20px;
         }
 
-        #toast { 
-            visibility: hidden; min-width: 200px; background: #fff; color: #000; 
-            text-align: center; border-radius: 50px; padding: 12px 24px; 
-            position: fixed; z-index: 1000; left: 50%; bottom: 40px; 
-            transform: translateX(-50%); font-weight: 700; font-size: 0.9rem;
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
-        #toast.show { visibility: visible; animation: pop 0.4s ease-out; }
 
-        @keyframes pop { from { bottom: 0; opacity: 0; } to { bottom: 40px; opacity: 1; } }
+        /* The slanting PUBG-style Card */
+        .support-card {
+            background: #252525;
+            border: 1px solid var(--border-gray);
+            position: relative;
+            padding: 20px;
+            transition: 0.3s;
+            cursor: pointer;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 95% 100%, 0 100%);
+        }
 
-        footer { padding: 60px 20px; text-align: center; opacity: 0.4; font-size: 0.7rem; letter-spacing: 2px; }
+        .support-card:hover {
+            border-color: var(--pubg-gold);
+            background: #2a2a2a;
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+            color: var(--pubg-gold);
+            margin-bottom: 10px;
+        }
+
+        .card-title { font-weight: 700; text-transform: uppercase; font-size: 1rem; margin-bottom: 5px; }
+        .card-desc { font-size: 0.8rem; color: #888; }
+
+        .id-badge {
+            background: var(--pubg-gold);
+            color: #000;
+            font-weight: 800;
+            padding: 5px 10px;
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            border-radius: 2px;
+        }
+
+        .contact-btn {
+            display: block;
+            width: fit-content;
+            margin: 40px auto;
+            padding: 15px 40px;
+            background: transparent;
+            border: 2px solid var(--pubg-gold);
+            color: var(--pubg-gold);
+            text-decoration: none;
+            font-weight: 900;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .contact-btn:hover {
+            background: var(--pubg-gold);
+            color: #000;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: #000;
+            color: #555;
+            font-size: 0.7rem;
+            line-height: 1.6;
+        }
+
+        #toast {
+            visibility: hidden;
+            background: var(--pubg-gold);
+            color: #000;
+            text-align: center;
+            padding: 10px 20px;
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: bold;
+            z-index: 1000;
+        }
+        #toast.show { visibility: visible; animation: fadeInUp 0.3s; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translate(-50%, 20px); } to { opacity: 1; transform: translate(-50%, 0); } }
     </style>
 </head>
 <body>
 
-    <div class="bg-wrapper">
-        <div class="glow glow-1"></div>
-        <div class="glow glow-2"></div>
-    </div>
-    <div class="grid-overlay"></div>
-
-    <div id="toast">ID COPIED ✅</div>
+    <div id="toast">COPIED TO CLIPBOARD</div>
 
     <header>
-        <div class="logo">JFLEX<span style="color:var(--primary)">.OG</span></div>
-        <div style="font-size: 0.65rem; background: rgba(134, 239, 172, 0.1); color: var(--primary); padding: 6px 15px; border-radius: 30px; border: 1px solid rgba(134, 239, 172, 0.2);">IT SPECIALIST</div>
+        <div class="logo-area">
+            <div class="logo-main">JFLEX<span style="color:var(--pubg-gold)">.OG</span></div>
+            <div class="logo-tag">Player Support</div>
+        </div>
+        <div style="font-size: 1.2rem;">🌐</div>
     </header>
 
     <section class="hero">
-        <h1>THE DIGITAL<br>ARCHITECT</h1>
-        <p>Mastering code and systems. Crafting the future of tech in Tanzania.</p>
+        <h1>WELCOME TO<br><span class="highlight">JFLEX.OG</span> DIGITAL SOLUTIONS</h1>
+        <input type="text" class="search-bar" placeholder="Search for solutions or IDs...">
     </section>
 
-    <div class="container">
-        <div class="grid">
-            
-            <div class="card">
-                <span class="id-label">PUBG Mobile</span>
-                <span class="id-value" id="pubgId">5882549343</span>
-                <button class="btn" onclick="copyId('pubgId')">COPY PLAYER ID</button>
-            </div>
+    <h2 class="section-title">Common Solutions</h2>
 
-            <div class="card" style="border-color: #4ade80; background: rgba(74, 222, 128, 0.05);">
-                <span class="id-label">Creator Hub</span>
-                <span class="id-value" style="font-size: 1.2rem;">EXCLUSIVE LINK</span>
-                <a href="https://sg.creatorhub.pubgmobile.com/t/r0PXHj" target="_blank" class="btn">OPEN HUB</a>
-            </div>
+    <div class="grid-container">
+        <div class="support-card" onclick="copyText('5882549343')">
+            <div class="card-icon">🎮</div>
+            <div class="card-title">PUBG Mobile ID</div>
+            <div class="card-desc">Click to copy player identification</div>
+            <div class="id-badge">5882549343</div>
+        </div>
 
-            <div class="card">
-                <span class="id-label">Instagram</span>
-                <span class="id-value">@jflex_og</span>
-                <a href="https://instagram.com/jflex_og" target="_blank" class="btn" style="background: transparent; border: 1px solid var(--primary); color: #fff;">FOLLOW</a>
-            </div>
+        <div class="support-card" onclick="window.open('https://wa.me/255610274920')">
+            <div class="card-icon">💬</div>
+            <div class="card-title">Direct Contact</div>
+            <div class="card-desc">WhatsApp for technical assistance</div>
+            <div class="id-badge">+255 610 274 920</div>
+        </div>
 
-            <div class="card">
-                <span class="id-label">TikTok</span>
-                <span class="id-value">@jflexxxogg</span>
-                <a href="https://www.tiktok.com/@jflexxxogg" target="_blank" class="btn" style="background: transparent; border: 1px solid var(--primary); color: #fff;">WATCH</a>
-            </div>
+        <div class="support-card" onclick="window.open('https://instagram.com/jflex_og')">
+            <div class="card-icon">📸</div>
+            <div class="card-title">Instagram</div>
+            <div class="card-desc">Official social media updates</div>
+            <div class="id-badge">@jflex_og</div>
+        </div>
 
-            <div class="card whatsapp-card">
-                <span class="id-label">Connect</span>
-                <span class="id-value">+255 610 274 920</span>
-                <a href="https://wa.me/255610274920" target="_blank" class="btn" style="max-width: 300px; margin: 0 auto;">START CHAT</a>
-            </div>
-
+        <div class="support-card" onclick="window.open('https://www.tiktok.com/@jflexxxogg')">
+            <div class="card-icon">🎵</div>
+            <div class="card-title">TikTok Feed</div>
+            <div class="card-desc">Latest clips and highlights</div>
+            <div class="id-badge">@jflexxxogg</div>
         </div>
     </div>
 
+    <h2 class="section-title">Support Categories</h2>
+
+    <div class="grid-container">
+        <div class="support-card"><div class="card-title">Login Issue</div><div class="card-desc">Unable to enter game</div></div>
+        <div class="support-card"><div class="card-title">Purchase Issue</div><div class="card-desc">Abnormal UC purchase</div></div>
+        <div class="support-card"><div class="card-title">Account Issues</div><div class="card-desc">Lost/Stolen/Forgot</div></div>
+        <div class="support-card"><div class="card-title">Penalty Issue</div><div class="card-desc">Account Ban/Mute</div></div>
+    </div>
+
+    <a href="https://sg.creatorhub.pubgmobile.com/t/r0PXHj" class="contact-btn">Visit Creator Hub</a>
+
+    <footer>
+        <p>© 2026 JFLEX OG • DAR ES SALAAM, TZ</p>
+        <p>A Tencent Cloud Intelligence Service System Company Copyright.</p>
+    </footer>
+
     <script>
-        function copyId(elementId) {
-            const text = document.getElementById(elementId).innerText;
+        function copyText(text) {
             navigator.clipboard.writeText(text).then(() => {
                 const toast = document.getElementById("toast");
                 toast.className = "show";
-                setTimeout(() => toast.className = "", 2500);
+                setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
             });
         }
     </script>
-
-    <footer>&copy; 2026 JFLEX OG • DAR ES SALAAM, TZ</footer>
 </body>
 </html>
